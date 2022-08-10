@@ -1,35 +1,23 @@
-import {
-  ColorScheme,
-  ColorSchemeProvider,
-  MantineProvider,
-  Paper,
-} from "@mantine/core";
-import React from "react";
+import { Paper, useMantineColorScheme } from "@mantine/core";
 import Cards from "./components/Cards";
 import LightAndDarkModeButton from "./components/LightDarkButton";
-import { theme } from "./theme/themes";
 
 function App() {
-  const [colorScheme, setColorScheme] = React.useState<ColorScheme>("light");
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
-
+  const { colorScheme } = useMantineColorScheme();
   return (
-    <ColorSchemeProvider
-      colorScheme={colorScheme}
-      toggleColorScheme={toggleColorScheme}
+    <Paper
+      radius={0}
+      style={{ minHeight: "100vh", padding: "10px" }}
+      sx={(th) => ({
+        backgroundColor:
+          colorScheme === "dark"
+            ? th.colors[th.primaryColor][9]
+            : th.colors[th.primaryColor][0],
+      })}
     >
-      <MantineProvider
-        theme={{ ...theme, colorScheme }}
-        withGlobalStyles
-        withNormalizeCSS
-      >
-        <Paper radius={0} style={{ minHeight: "100vh", padding: "10px" }}>
-          <LightAndDarkModeButton />
-          <Cards />
-        </Paper>
-      </MantineProvider>
-    </ColorSchemeProvider>
+      <LightAndDarkModeButton />
+      <Cards />
+    </Paper>
   );
 }
 
