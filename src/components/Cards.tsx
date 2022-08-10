@@ -24,7 +24,7 @@ function Cards() {
   return (
     <Grid justify="space-around">
       <Grid.Col style={{ maxWidth: 350 }} sm={4} xs={4}>
-        <Card shadow="sm" sx={(th) => ({ backgroundColor: secondaryColor })}>
+        <Card shadow="sm" style={{ backgroundColor: secondaryColor }}>
           <Card.Section>
             <Image
               src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
@@ -65,7 +65,7 @@ function Cards() {
       </Grid.Col>
 
       <Grid.Col style={{ maxWidth: 350 }} sm={4} xs={4}>
-        <Card shadow="sm" sx={(th) => ({ backgroundColor: secondaryColor })}>
+        <Card shadow="sm" style={{ backgroundColor: secondaryColor }}>
           <Card.Section>
             <Image
               src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
@@ -106,7 +106,7 @@ function Cards() {
       </Grid.Col>
 
       <Grid.Col style={{ maxWidth: 350 }} sm={4} xs={4}>
-        <Card shadow="sm" sx={(th) => ({ backgroundColor: secondaryColor })}>
+        <Card shadow="sm" style={{ backgroundColor: secondaryColor }}>
           <Card.Section>
             <Image
               src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
