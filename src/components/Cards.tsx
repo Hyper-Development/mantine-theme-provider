@@ -15,10 +15,7 @@ function Cards() {
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
 
   return (
-    <Grid
-      justify="space-around"
-      style={{ backgroundColor: theme.primaryColor }}
-    >
+    <Grid justify="space-around">
       <Grid.Col style={{ maxWidth: 350 }} sm={4} xs={4}>
         <Card shadow="sm">
           <Card.Section>
@@ -54,6 +51,7 @@ function Cards() {
           </Button>
         </Card>
       </Grid.Col>
+
       <Grid.Col style={{ maxWidth: 350 }} sm={4} xs={4}>
         <Card shadow="sm">
           <Card.Section>
@@ -89,6 +87,7 @@ function Cards() {
           </Button>
         </Card>
       </Grid.Col>
+
       <Grid.Col style={{ maxWidth: 350 }} sm={4} xs={4}>
         <Card shadow="sm">
           <Card.Section>
