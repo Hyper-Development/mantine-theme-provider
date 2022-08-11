@@ -1,4 +1,3 @@
-import { useLocalStorage } from "@mantine/hooks";
 import React from "react";
 
 export type ColorSchemeType = "light" | "dark" | "contrast";
