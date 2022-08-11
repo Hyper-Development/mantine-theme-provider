@@ -15,21 +15,16 @@ const ColorSchemeContext = React.createContext<IColorSchemeContext>({
 
 interface IColorSchemeProviderProps {
   initColorScheme?: ColorSchemeType;
+  onChange: (colorScheme: ColorSchemeType) => void;
 }
 
 const ColorSchemeProvider: React.FC<
   React.PropsWithChildren<IColorSchemeProviderProps>
 > = (props) => {
-  const { children, initColorScheme } = props;
-
+  const { children, initColorScheme, onChange } = props;
   const [colorScheme, setColorScheme] = React.useState<ColorSchemeType>(
     initColorScheme || "light"
   );
-  const setLocalStorage = useLocalStorage<ColorSchemeType>({
-    key: "mantine-color-scheme",
-    defaultValue: "light",
-    getInitialValueInEffect: true,
-  })[1];
 
   return (
     <ColorSchemeContext.Provider
@@ -37,7 +32,8 @@ const ColorSchemeProvider: React.FC<
         colorScheme: colorScheme,
         setColorScheme: (colorScheme) => {
           setColorScheme(colorScheme);
-          setLocalStorage(colorScheme);
+          localStorage.setItem("mantine-color-scheme", colorScheme);
+          onChange(colorScheme);
         },
       }}
     >

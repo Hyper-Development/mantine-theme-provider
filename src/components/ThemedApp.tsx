@@ -1,5 +1,4 @@
 import { MantineProvider } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
 import React from "react";
 import App from "../App";
 import {
@@ -13,15 +12,15 @@ import {
 } from "../theme/themes";
 
 const ThemedApp: React.FC<{}> = () => {
-  const colorScheme = useLocalStorage<ColorSchemeType>({
-    key: "mantine-color-scheme",
-    defaultValue: "light",
-    getInitialValueInEffect: true,
-  })[0];
+  const [colorScheme, setColorScheme] = React.useState<ColorSchemeType>(
+    (localStorage.getItem("mantine-color-scheme") as ColorSchemeType) || "light"
+  );
 
-  console.log(colorScheme);
   return (
-    <ColorSchemeProvider initColorScheme={colorScheme}>
+    <ColorSchemeProvider
+      initColorScheme={colorScheme}
+      onChange={setColorScheme}
+    >
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS

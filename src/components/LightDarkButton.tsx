@@ -4,22 +4,25 @@ import { useColorScheme } from "../context/useColorScheme";
 function LightAndDarkModeButton() {
   const { colorScheme, setColorScheme } = useColorScheme();
   const theme = useMantineTheme();
-  const light = colorScheme === "light";
-  const dark = colorScheme === "dark";
-  const contrast = colorScheme === "contrast";
 
   return (
     <ActionIcon
       variant="outline"
       color={theme.primaryColor}
       onClick={() =>
-        setColorScheme(dark ? "contrast" : contrast ? "light" : "dark")
+        setColorScheme(
+          colorScheme === "dark"
+            ? "contrast"
+            : colorScheme === "contrast"
+            ? "light"
+            : "dark"
+        )
       }
       title="Toggle color scheme"
     >
-      {dark && "🌙"}
-      {light && "🌞"}
-      {contrast && "C"}
+      {colorScheme === "dark" && "🌙"}
+      {colorScheme === "light" && "🌞"}
+      {colorScheme === "contrast" && "C"}
     </ActionIcon>
   );
 }

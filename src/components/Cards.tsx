@@ -9,11 +9,15 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
+import { useColorScheme } from "../context/useColorScheme";
 
 function Cards() {
   const theme = useMantineTheme();
+  const { colorScheme } = useColorScheme();
   const secondaryColor =
-    theme.colorScheme === "dark" ? theme.colors.gray[5] : theme.colors.dark[5];
+    colorScheme === "dark" || colorScheme === "contrast"
+      ? theme.colors.dark[6]
+      : theme.colors.gray[4];
 
   return (
     <Box>
