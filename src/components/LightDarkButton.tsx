@@ -1,22 +1,25 @@
-import {
-  ActionIcon,
-  useMantineColorScheme,
-  useMantineTheme,
-} from "@mantine/core";
+import { ActionIcon, useMantineTheme } from "@mantine/core";
+import { useColorScheme } from "../context/useColorScheme";
 
 function LightAndDarkModeButton() {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
   const theme = useMantineTheme();
+  const light = colorScheme === "light";
   const dark = colorScheme === "dark";
+  const contrast = colorScheme === "contrast";
 
   return (
     <ActionIcon
       variant="outline"
       color={theme.primaryColor}
-      onClick={() => toggleColorScheme()}
+      onClick={() =>
+        setColorScheme(dark ? "contrast" : contrast ? "light" : "dark")
+      }
       title="Toggle color scheme"
     >
-      {dark ? "🌞" : "🌚"}
+      {dark && "🌙"}
+      {light && "🌞"}
+      {contrast && "C"}
     </ActionIcon>
   );
 }

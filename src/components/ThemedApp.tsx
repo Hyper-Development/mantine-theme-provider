@@ -1,59 +1,38 @@
-import {
-  ColorScheme,
-  ColorSchemeProvider,
-  MantineProvider,
-} from "@mantine/core";
-import { useColorScheme, useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { MantineProvider } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
 import React from "react";
 import App from "../App";
-import { theme } from "../theme/themes";
+import {
+  ColorSchemeProvider,
+  ColorSchemeType,
+} from "../context/useColorScheme";
+import {
+  teamsContrastTheme,
+  teamsDarkTheme,
+  teamsTheme,
+} from "../theme/themes";
 
 const ThemedApp: React.FC<{}> = () => {
-  const preferredColorScheme = useColorScheme();
-  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+  const colorScheme = useLocalStorage<ColorSchemeType>({
     key: "mantine-color-scheme",
-    defaultValue: preferredColorScheme || "light",
+    defaultValue: "light",
     getInitialValueInEffect: true,
-  });
+  })[0];
 
-  const toggleColorScheme = (value?: ColorScheme) => {
-    const v = value || (colorScheme === "dark" ? "light" : "dark");
-    setColorScheme(v);
-  };
-
-  useHotkeys([["mod+J", () => toggleColorScheme()]]);
+  console.log(colorScheme);
   return (
-    <ColorSchemeProvider
-      colorScheme={colorScheme}
-      toggleColorScheme={toggleColorScheme}
-    >
+    <ColorSchemeProvider initColorScheme={colorScheme}>
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        theme={{ colorScheme, ...theme }}
+        theme={
+          colorScheme === "dark"
+            ? teamsDarkTheme
+            : colorScheme === "contrast"
+            ? teamsContrastTheme
+            : teamsTheme
+        }
       >
-        {/* <Global
-          styles={(theme) => [
-            {
-              "*, *::before, *::after": {
-                boxSizing: "border-box",
-              },
-
-              body: {
-                ...theme.fn.fontStyles(),
-                backgroundColor:
-                  theme.colorScheme === "dark"
-                    ? theme.colors.dark[7]
-                    : theme.white,
-                color:
-                  theme.colorScheme === "dark"
-                    ? theme.colors.dark[0]
-                    : theme.black,
-                lineHeight: theme.lineHeight,
-              },
-            },
-          ]}
-        /> */}
         <App />
       </MantineProvider>
     </ColorSchemeProvider>
